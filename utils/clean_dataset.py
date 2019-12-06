@@ -4,7 +4,7 @@ import logging
 logger = logging.getLogger("dataset_cleaner")
 logger.setLevel(logging.INFO)
 
-special_quotes = re.compile(r"[＂〃ˮײ᳓″״‶˶ʺ“”˝‟]+", re.M)
+special_quotes = re.compile(r"[\"＂〃ˮײ᳓″״‶˶ʺ“”˝‟]+", re.M)
 
 
 def replace_special_quotes(content):
