@@ -3,4 +3,5 @@ sklearn
 matplotlib
 seaborn
 jupyter
+numpy
 wordcloud
