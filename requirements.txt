@@ -4,4 +4,5 @@ matplotlib
 seaborn
 jupyter
 numpy
+scipy
 wordcloud
