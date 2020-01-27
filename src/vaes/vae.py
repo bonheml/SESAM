@@ -27,9 +27,9 @@ class VAE(keras.Model):
         :param loss_func: Loss function to call
         :param input_dim: Input shape
         :param latent_dim: Latent variable shape
-        :param optimizer: optimizer to use. (Default: Adam(5e-4), similarly to [2])
+        :param optimizer: optimizer to use. (Default: Adam(5e-4), similarly to [1])
 
-        [2] Burgess, C.P., Higgins, I., Pal, A., Matthey, L., Watters, N., Desjardins, G. and Lerchner, A., 2018.
+        [1] Burgess, C.P., Higgins, I., Pal, A., Matthey, L., Watters, N., Desjardins, G. and Lerchner, A., 2018.
         Understanding disentangling in $\beta $-VAE. arXiv preprint arXiv:1804.03599.
         """
         super(VAE, self).__init__()
