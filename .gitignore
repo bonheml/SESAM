@@ -1,6 +1,6 @@
-/data/
+data/
 .idea
 .venv
-
 *.pyc
 .ipynb_checkpoints
+memotion_analysis.egg-info/
