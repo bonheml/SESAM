@@ -1,0 +1,22 @@
+from setuptools import setup, find_packages
+
+setup(name="memotion_analysis",
+      version="1.0",
+      description="Semeval 2020 task 8: memotion analysis",
+      url="https://github.com/bonheml/SESAM",
+      author="Lisa Bonheme",
+      author_email="lb732@kent.ac.uk",
+      license="MIT",
+      packages=find_packages(),
+      python_requires='>=3.6',
+      install_requires=["pandas == 0.25.3",
+                        "scikit-learn == 0.21.3",
+                        "matplotlib == 3.1.2",
+                        "seaborn == 0.9.0",
+                        "jupyter == 1.0.0",
+                        "numpy == 1.17.4",
+                        "scipy == 1.4.1",
+                        "wordcloud == 1.6.0",
+                        "rpy2 == 3.2.4",
+                        "tensorflow == 2.1.0"],
+      )

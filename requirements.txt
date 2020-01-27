@@ -1,8 +1,10 @@
 pandas
-sklearn
+scikit-learn
 matplotlib
 seaborn
 jupyter
 numpy
 scipy
 wordcloud
+rpy2
+tensorflow
