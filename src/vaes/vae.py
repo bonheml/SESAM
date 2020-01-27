@@ -27,14 +27,17 @@ class VAE(keras.Model):
         :param loss_func: Loss function to call
         :param input_dim: Input shape
         :param latent_dim: Latent variable shape
-        :param optimizer: optimizer to use. (Default: Adam(1e-4))
+        :param optimizer: optimizer to use. (Default: Adam(5e-4), similarly to [2])
+
+        [2] Burgess, C.P., Higgins, I., Pal, A., Matthey, L., Watters, N., Desjardins, G. and Lerchner, A., 2018.
+        Understanding disentangling in $\beta $-VAE. arXiv preprint arXiv:1804.03599.
         """
         super(VAE, self).__init__()
         self._latent_dim = latent_dim
         self.encoder = encoder(input_dim, latent_dim)
-        self.decoder = decoder(latent_dim, input_dim)
+        self.decoder = decoder(input_dim, latent_dim)
         self.loss_func = loss_func
-        self.optimizer = tf.keras.optimizers.Adam(1e-4) if optimizer is None else optimizer
+        self.optimizer = tf.keras.optimizers.Adam(5e-4) if optimizer is None else optimizer
 
     def encode(self, X):
         """ Encode X and retrieve mean and variance by splitting the last layer in two
