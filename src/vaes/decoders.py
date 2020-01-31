@@ -25,7 +25,6 @@ def deconvolutional_decoder(output_dim, latent_dim=10):
     decoder.add(Conv2DTranspose(filters=32, kernel_size=4, strides=2, activation="relu", padding="SAME"))
     decoder.add(Conv2DTranspose(filters=32, kernel_size=4, strides=2, activation="relu", padding="SAME"))
     decoder.add(Conv2DTranspose(filters=32, kernel_size=4, strides=2, activation="relu", padding="SAME"))
-    decoder.add(Conv2DTranspose(filters=32, kernel_size=4, strides=2, activation="relu", padding="SAME"))
-    decoder.add(Conv2DTranspose(filters=output_dim[0], kernel_size=4, strides=2, padding="SAME"))
+    decoder.add(Conv2DTranspose(filters=output_dim[2], kernel_size=4, strides=2, padding="SAME"))
 
     return decoder

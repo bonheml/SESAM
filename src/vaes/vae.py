@@ -45,7 +45,7 @@ class VAE(keras.Model):
         :param X: input to encode
         :return: mean and variance returned by the encoder
         """
-        mu, log_var = tf.split(self.encoder(X), num_or_size_split=2, axis=1)
+        mu, log_var = tf.split(self.encoder(X), num_or_size_splits=2, axis=1)
         return mu, log_var
 
     def decode(self, Z, sigmoid=False):
@@ -55,7 +55,7 @@ class VAE(keras.Model):
         :param sigmoid: if True returns the sigmoid of the reconstructed X, otherwise returns X
         :return: the reconstructed X (or its sigmoid if sigmoid = True)
         """
-        X_hat = self.decode(Z)
+        X_hat = self.decoder(Z)
         return tf.sigmoid(X_hat) if sigmoid else X_hat
 
     @tf.function
@@ -72,8 +72,8 @@ class VAE(keras.Model):
         return mu, log_var, Z, X_hat
 
     @tf.function
-    def backward(self, X):
-        """ A backward pass which computes and apply the gradients during training
+    def train(self, X):
+        """ A forward + backward pass which computes and apply the gradients during training
 
         :param X: the input value
         :return: None
