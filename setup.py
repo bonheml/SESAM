@@ -18,5 +18,6 @@ setup(name="memotion_analysis",
                         "scipy == 1.4.1",
                         "wordcloud == 1.6.0",
                         "rpy2 == 3.2.4",
-                        "tensorflow == 2.1.0"],
+                        "tensorflow == 2.1.0",
+                        "tensorflow-hub==0.7.0"],
       )

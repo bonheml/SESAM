@@ -8,3 +8,4 @@ scipy
 wordcloud
 rpy2
 tensorflow
+tensorflow-hub
