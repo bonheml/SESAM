@@ -1,4 +1,4 @@
-from src.baseline.image_preprocessing import FeatureExtractor
+from src.preprocessing.image_preprocessing import FeatureExtractor
 
 
 def extract_all(model_name, images_directory, features_outfile):
