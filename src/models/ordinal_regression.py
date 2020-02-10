@@ -21,6 +21,11 @@ class OrdinalClassifier:
         self.labels = labels
 
     def _check_y_labels(self, y):
+        """Ensure that the given labels match the ones provided during initialisation
+
+        :param y: list of labels
+        :return: None
+        """
         y_labels = np.unique(y)
         try:
             assert set(y_labels) == set(self.labels)
@@ -28,12 +33,23 @@ class OrdinalClassifier:
             raise AssertionError("The labels {} are not matching the given classes {}".format(y_labels, self.labels))
 
     def fit(self, X, y):
+        """Fit the n_labels -1 classifiers
+
+        :param X: input features
+        :param y: true labels
+        :return: None
+        """
         self._check_y_labels(y)
         for k, clf in self.clfs.items():
             binary_y = self.labels.index(y) > k
             clf.fit(X, binary_y)
 
     def predict_proba(self, X):
+        """Predict the probability of each ordinal label
+
+        :param X: input features
+        :return: list of predicted probabilities
+        """
         clfs_pred = {i: clf.predict_proba(X) for i, clf in self.clfs.items()}
         n_classes = self.labels.shape[0] - 1
         predicted_proba = []
@@ -46,5 +62,10 @@ class OrdinalClassifier:
         return predicted_proba
 
     def predict(self, X):
+        """Predict the label of X
+
+        :param X: input features
+        :return: the predicted label
+        """
         pred_label_idx = np.argmax(self.predict_proba(X))
         return pred_label_idx, self.labels[pred_label_idx]
