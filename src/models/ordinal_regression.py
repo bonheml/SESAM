@@ -41,7 +41,7 @@ class OrdinalClassifier:
         """
         self._check_y_labels(y)
         for k, clf in self.clfs.items():
-            binary_y = self.labels.index(y) > k
+            binary_y = list(y.map(lambda x: self.labels.index(x) > k))
             clf.fit(X, binary_y)
 
     def predict_proba(self, X):
@@ -51,15 +51,15 @@ class OrdinalClassifier:
         :return: list of predicted probabilities
         """
         clfs_pred = {i: clf.predict_proba(X) for i, clf in self.clfs.items()}
-        n_classes = self.labels.shape[0] - 1
+        n_classes = len(self.labels) - 1
         predicted_proba = []
 
-        for i, name in self.labels:
-            prev_pred = 1 if i == 0 else clfs_pred[i - 1]
-            curr_pred = 0 if i >= n_classes else clfs_pred[i]
+        for i, name in enumerate(self.labels):
+            prev_pred = 1 if i == 0 else clfs_pred[i - 1][:, 1]
+            curr_pred = 0 if i >= n_classes else clfs_pred[i][:, 1]
             predicted_proba.append(prev_pred - curr_pred)
 
-        return predicted_proba
+        return np.vstack(predicted_proba).T
 
     def predict(self, X):
         """Predict the label of X
@@ -67,5 +67,4 @@ class OrdinalClassifier:
         :param X: input features
         :return: the predicted label
         """
-        pred_label_idx = np.argmax(self.predict_proba(X))
-        return pred_label_idx, self.labels[pred_label_idx]
+        return np.argmax(self.predict_proba(X), axis=1)
