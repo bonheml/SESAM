@@ -60,9 +60,8 @@ class FeatureExtractor:
         features = {}
 
         for file in listdir(directory):
-            img_id = splitext(file)[0]
             file_path = "/".join([directory, file])
-            features[img_id] = self.extract_features(file_path)
+            features[file] = self.extract_features(file_path)
 
         if outfile is not None:
             save_as_pickle(features, outfile)
