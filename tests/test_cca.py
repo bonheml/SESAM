@@ -1,7 +1,7 @@
 import pandas as pd
 from rpy2.robjects import numpy2ri
 from rpy2.robjects.packages import importr
-from tests.r_setup import install_r_packages, rtp_list
+from src.utils.r_setup import install_r_packages, rtp_list
 from src.models.cca import compute_cca
 
 
