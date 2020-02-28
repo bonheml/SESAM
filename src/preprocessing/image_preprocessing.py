@@ -1,17 +1,16 @@
 from os import listdir
-from os.path import abspath, splitext
-
+from os.path import abspath
 from tensorflow.keras import Model
 from tensorflow.keras.applications import Xception, VGG16, VGG19
 from tensorflow.keras.applications.xception import preprocess_input
 from tensorflow.keras.preprocessing.image import load_img, img_to_array
 
-from src.utils.file_utils import save_as_pickle
+from src.utils.files import save_as_pickle
 from PIL import ImageFile
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 
-class FeatureExtractor:
+class ImageFeatureExtractor:
     def __init__(self, model_name='xception'):
         self.model = self._prepare_model(model_name)
         if model_name is 'xception':
