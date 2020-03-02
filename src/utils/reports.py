@@ -2,7 +2,7 @@ from zipfile import ZipFile
 import numpy as np
 
 
-def generate_report(task_a, task_b, task_c, save=True):
+def generate_report(task_a, task_b, task_c, save=True, zipname="res.zip"):
     report = ""
     task_a = task_a - 1
     for i in range(task_a.shape[0]):
@@ -12,7 +12,7 @@ def generate_report(task_a, task_b, task_c, save=True):
 
     if save is True:
         print(report, file=open("answer.txt", 'w'))
-        with ZipFile("res.zip", 'w') as myzip:
+        with ZipFile(zipname, 'w') as myzip:
             myzip.write("answer.txt")
 
     return report
