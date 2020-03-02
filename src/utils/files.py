@@ -1,5 +1,6 @@
 from pickle import load, dump
 import pandas as pd
+import joblib
 
 
 def load_pickle_file(filename):
@@ -47,5 +48,9 @@ def load_dfs(dfs):
                 "Sarcasm_bin", "Offense_bin", "Motivation_bin"]
 
     return [load_cat_df(df, use_cols, categories) for df in dfs]
+
+
+def load_clfs(clf_files):
+    return [joblib.load(f) for f in clf_files]
 
 
