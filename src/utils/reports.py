@@ -18,3 +18,13 @@ def generate_report(task_a, task_b, task_c, save=True, zipname="res.zip"):
     return report
 
 
+def generate_reports(res_a, res_b, res_c, model_name):
+    configs = ["text only", "image only", "concatenated"]
+    r = None
+    for c in configs:
+        task_a = res_a[c]["pred_cls_test"]
+        task_b = res_b[c]["pred_cls_test"]
+        task_c = res_c[c]["pred_cls_test"]
+        r = generate_report(task_a, task_b, task_c, zipname="res_{}_{}.zip".format(model_name, "_".join(c.split())))
+    return r
+
