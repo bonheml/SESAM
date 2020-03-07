@@ -4,13 +4,25 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.utils.multiclass import check_classification_targets
 
 
-def soft_transform(clfs, embeds):
-    probas = np.array([clf.predict_proba(embeds[i]) for i, clf in enumerate(clfs)])
-    return np.argmax(np.average(probas, axis=0), axis=1)
+def soft_transform(clfs, embeds, multilabel, multitask):
+    probas = [clf.predict_proba(embeds[i]) for i, clf in enumerate(clfs)]
+    probas = list(zip(*probas))
+    if multitask:
+        res = []
+        for p in probas:
+            p = np.rollaxis(np.array(p), 1, 0)
+            res.append(np.argmax(np.average(p, axis=1), axis=1))
+        return np.array(list(zip(*res)))
+
+    probas_avg = np.average(np.array(probas), axis=1)
+    if multilabel:
+        return probas_avg.round().astype(int)
+    return np.argmax(probas_avg, axis=1)
 
 
-def hard_transform(clfs, embeds):
+def hard_transform(clfs, embeds, multilabel, multitask):
     preds = np.array([clf.predict(embeds[i]) for i, clf in enumerate(clfs)])
+    print(preds)
     return np.apply_along_axis(lambda x: np.argmax(np.bincount(x)), arr=preds, axis=1)
 
 
