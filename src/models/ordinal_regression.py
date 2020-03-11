@@ -25,14 +25,6 @@ class OrdinalClassifier(ClassifierMixin, MetaEstimatorMixin, BaseEstimator):
     def _more_tags(self):
         return {'multioutput_only': True}
 
-    def get_params(self, deep=True):
-        return {"estimator": self.estimator}
-
-    def set_params(self, **parameters):
-        for parameter, value in parameters.items():
-            setattr(self, parameter, value)
-        return self
-
     def _fit_multi(self):
         classes_list = list(self.classes_)
         for i in range(self.classes_.shape[0] - 1):
