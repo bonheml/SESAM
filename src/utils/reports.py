@@ -19,7 +19,7 @@ def generate_report(task_a, task_b, task_c, save=True, zipname="res.zip"):
 
 
 def generate_reports(res_a, res_b, res_c, model_name):
-    configs = ["text only", "image only", "concatenated"]
+    configs = ["text only", "image only", "deep cca", "concatenated"]
     r = None
     for c in configs:
         task_a = res_a[c]["pred_cls_test"]
