@@ -10,3 +10,4 @@ rpy2
 tensorflow
 tensorflow-hub
 imbalanced-learn
+umap-learn[plot]
